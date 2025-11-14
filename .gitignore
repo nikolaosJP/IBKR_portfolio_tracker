@@ -1,5 +1,6 @@
 # Data files - contains confidential financial information
-data/
+data/*
+!data/.gitkeep
 *.csv
 
 # Jupyter notebook checkpoints

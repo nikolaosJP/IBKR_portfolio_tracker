@@ -44,10 +44,6 @@ Open `jupyter/portfolio_analysis.ipynb` and run all cells to generate portfolio 
 - **TWR**: `(Current Equity / Total Contributed) - 1`
 - **Annualized TWR**: `[(1 + TWR)^(1/years) - 1] × 100`
 
-## Security
-
-⚠️ This repository does not include actual financial data. All CSV files are gitignored and notebooks have cleared outputs.
-
 ## Disclaimer
 
 For informational purposes only. Not financial advice.
