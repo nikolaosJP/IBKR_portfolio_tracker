@@ -1,14 +1,6 @@
 # IBKR Portfolio Tracker
 
-A comprehensive Python-based portfolio analysis and tracking tool for Interactive Brokers (IBKR) account data. This project provides automated portfolio analytics, performance metrics calculation, visualization, and rebalancing recommendations.
-
-## Features
-
-- **Portfolio Metrics**: Calculate key performance indicators including ROIC, Time-Weighted Return (TWR), and annualized returns
-- **Real-time Analysis**: Fetch current market prices using Yahoo Finance for up-to-date portfolio valuation
-- **Visualization**: Generate comprehensive charts for portfolio value, P&L, allocation, and performance over time
-- **Rebalancing**: Calculate optimal trades to rebalance portfolio to target allocation
-- **CSV Import**: Process IBKR CSV exports containing trades, dividends, deposits, withdrawals, and positions
+Portfolio analysis and tracking tool for Interactive Brokers account data with automated analytics, performance metrics, visualizations, and rebalancing recommendations.
 
 ## Project Structure
 
@@ -27,100 +19,35 @@ IBKR_portfolio_tracker/
 
 ## Installation
 
-### Prerequisites
-
-- Python 3.8+
-- Jupyter Notebook (optional, for interactive analysis)
-
-### Dependencies
-
-Install required packages:
-
 ```bash
-pip install polars yfinance matplotlib numpy
+uv pip install polars yfinance matplotlib numpy
 ```
 
 ## Usage
 
 ### 1. Prepare Your Data
 
-Export your IBKR account data as CSV and place it in the `data/` directory with the naming pattern:
+Export your IBKR account data as CSV and place files in the `data/` directory:
 ```
 data/UXXXXXXXX_YYYYMMDD_YYYYMMDD.csv
 ```
 
-The CSV should include sections for:
-- Trades (Stocks and Forex)
-- Dividends and Withholding Tax
-- Deposits & Withdrawals
-- Fees
-- Open Positions
+You can have multiple CSV files covering different time periods (e.g., multiple years). The tool will process all CSV files in the `data/` directory.
 
-### 2. Run the Analysis Notebook
+### 2. Run Analysis
 
-```bash
-cd jupyter
-jupyter notebook portfolio_analysis.ipynb
-```
+Open `jupyter/portfolio_analysis.ipynb` and run all cells to generate portfolio metrics, performance charts, and rebalancing recommendations.
 
-Run all cells to generate:
-- Daily portfolio metrics with real-time prices
-- Performance charts (portfolio value, P&L, allocation)
-- Comprehensive summary report
-- Rebalancing recommendations
+## Key Metrics
 
-### 3. Use as a Python Library
+- **ROIC**: `(Unrealized + Realized + Dividends) / Invested Capital × 100`
+- **TWR**: `(Current Equity / Total Contributed) - 1`
+- **Annualized TWR**: `[(1 + TWR)^(1/years) - 1] × 100`
 
-```python
-import sys
-sys.path.insert(0, '../src')
+## Security
 
-from data_loader import load_transactions, load_positions
-from metrics import calculate_portfolio_metrics
-from visualization import plot_portfolio_performance, print_portfolio_summary
-from rebalancing import calculate_rebalancing
-
-# Load data
-transactions = load_transactions()
-positions = load_positions()
-
-# Calculate metrics
-portfolio_history = calculate_portfolio_metrics(transactions)
-
-# Visualize
-plot_portfolio_performance(portfolio_history, transactions)
-print_portfolio_summary(transactions, positions, portfolio_history)
-
-# Get rebalancing recommendations
-target_allocation = {'VTI': 72, 'SPY': 6, 'VXUS': 22}
-calculate_rebalancing(positions, target_allocation, investment_amount=24000)
-```
-
-## Key Metrics Explained
-
-- **ROIC (Return on Invested Capital)**:
-  ```
-  (Unrealized P&L + Realized P&L + Dividends) / Total Invested Capital × 100
-  ```
-
-- **TWR (Time-Weighted Return)**:
-  ```
-  (Current Equity / Total Contributed) - 1
-  ```
-
-- **Annualized TWR**:
-  ```
-  [(1 + TWR)^(1/years) - 1] × 100
-  ```
-
-## Security Notice
-
-⚠️ **Important**: This repository does not include any actual financial data. All CSV files and data outputs are gitignored. Jupyter notebooks have been cleared of all execution outputs to prevent exposure of confidential information.
-
-## License
-
-This project is for personal use. Feel free to adapt it for your own portfolio tracking needs.
+⚠️ This repository does not include actual financial data. All CSV files are gitignored and notebooks have cleared outputs.
 
 ## Disclaimer
 
-This tool is for informational and analytical purposes only. It does not constitute financial advice. Always consult with a qualified financial advisor before making investment decisions.
+For informational purposes only. Not financial advice.
